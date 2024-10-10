@@ -1,4 +1,18 @@
 
+//common functions
+
+// all pets value validates
+const getValidatedValue = (obj, key) =>
+    obj[key] ? obj[key] : "Not Available";
+
+// convert date of birth to only year function
+const getyearFromFullDate =(obj)=>
+    obj?new Date(obj).getFullYear():'Not Availble';
+
+// price validate function
+const validateprice = (obj, key) =>
+    obj[key]? `${obj[key]}$`: 'Not Available'
+
 
 //call category button API
 const loadCategories = () => {
@@ -35,14 +49,14 @@ const displayAllPets = (pets) =>{
     const petContainer = document.getElementById('all-pets-container');
     pets.forEach(pet => {
         const petCard = document.createElement('div');
-        petCard.classList = ('p-6 border rounded-xl')
+        petCard.classList = ('p-5 border rounded-xl')
         petCard.innerHTML = `
-            <img class="w-full max-h-[130px]" src="${pet.image}"/>
-            <h1>${pet.pet_name}</h1>
-            <p>${pet.breed}</p>
-            <p>${pet.date_of_birth}</p>
-            <p>${pet.gender}</p>
-            <p>${pet.price}$</p>
+            <img class="w-full max-h-[130px] rounded-xl" src="${pet.image}"/>
+            <h1 class="text-xl font-bold mt-4">${pet.pet_name}</h1>
+            <p>Breed: ${getValidatedValue(pet,"breed")}</p>
+            <p>Birth: ${getyearFromFullDate(pet.date_of_birth)}</p>
+            <p>Gender: ${getValidatedValue(pet, "gender")}</p>
+            <p>Price: ${validateprice(pet, 'price')}</p>
         `;
         petContainer.append(petCard);
     });
