@@ -15,22 +15,44 @@
 
 
         <!-- navbar section -->
-         <nav class="flex justify-between items-center">
-            <div class="flex gap-4">
-                <img class="w-12 h-12" src="images/logo.webp" alt="">
-                <p class="text-2xl md:text-3xl lg:text-4xl ">Peddy</p>
-            </div>
-            <div>
-                <ul class="flex gap-4 text-xl md:text-3xl">
-                    <li><a class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg hover:bg-[#0E7A81] hover:text-white hover:rounded-full transition-all duration-200 ease-in-out" href="">Home</a></li>
-                    <li><a class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg hover:bg-[#0E7A81] hover:text-white hover:rounded-full transition-all duration-200 ease-in-out" href="">Shop</a></li>
-                    <li><a class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg hover:bg-[#0E7A81] hover:text-white hover:rounded-full transition-all duration-200 ease-in-out" href="">Contact</a></li>
+        <div class="navbar bg-base-100">
+            <div class="navbar-start">
+              <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6h16M4 12h8m-8 6h16" />
+                  </svg>
+                </div>
+                <ul
+                  tabindex="0"
+                  class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                  <li><a href="Home">Home</a></li>
+                  <li><a href="Home">Shop</a></li>
+                  <li><a href="Home">Contact</a></li>
                 </ul>
+              </div>
+              <a class="btn btn-ghost text-xl md:text-2xl lg:text-3xl gap-3 hover:bg-transparent"><img src="images/logo.webp" alt=""> Peddy</a>
             </div>
-            <div>
-                <img class="w-12 h-12" src="https://img.icons8.com/?size=50&id=7820&format=png" alt="">
+            <div class="navbar-center hidden lg:flex">
+              <ul class="menu menu-horizontal px-1 gap-5">
+                <li><a class="text-lg hover:text-white hover:bg-[#0E7A81] hover rounded-3xl ease-in-out transition-all" href="Home">Home</a></li>
+                  <li><a class="text-lg hover:text-white hover:bg-[#0E7A81] hover rounded-3xl ease-in-out transition-all" href="Home">Shop</a></li>
+                  <li><a class="text-lg hover:text-white hover:bg-[#0E7A81] hover rounded-3xl ease-in-out transition-all" href="Home">Contact</a></li>
+              </ul>
             </div>
-         </nav>
+            <div class="navbar-end">
+              <a class="rounded-full cursor-pointer"><img src="https://img.icons8.com/?size=50&id=7820&format=png" alt=""></a>
+            </div>
+          </div>
     </header>
     
     <script src="script.js"></script>
