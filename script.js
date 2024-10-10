@@ -32,7 +32,20 @@ const displayCategories = (categories) => {
 
 //for display all pets from API call
 const displayAllPets = (pets) =>{
-    
+    const petContainer = document.getElementById('all-pets-container');
+    pets.forEach(pet => {
+        const petCard = document.createElement('div');
+        petCard.classList = ('p-6 border rounded-xl')
+        petCard.innerHTML = `
+            <img class="w-full max-h-[130px]" src="${pet.image}"/>
+            <h1>${pet.pet_name}</h1>
+            <p>${pet.breed}</p>
+            <p>${pet.date_of_birth}</p>
+            <p>${pet.gender}</p>
+            <p>${pet.price}$</p>
+        `;
+        petContainer.append(petCard);
+    });
 }
 
 
