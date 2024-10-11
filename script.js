@@ -6,12 +6,12 @@ const getValidatedValue = (obj, key) =>
     obj[key] ? obj[key] : "Not Available";
 
 // convert date of birth to only year function
-const getyearFromFullDate =(obj)=>
-    obj?new Date(obj).getFullYear():'Not Availble';
+const getyearFromFullDate = (obj) =>
+    obj ? new Date(obj).getFullYear() : 'Not Availble';
 
 // price validate function
-const validateprice = (obj, key) =>
-    obj[key]? `${obj[key]}$`: 'Not Available'
+const validatePrice = (obj, key) =>
+    obj[key] ? `${obj[key]}$` : 'Not Available'
 
 
 //call category button API
@@ -22,10 +22,10 @@ const loadCategories = () => {
 };
 
 // call all pets by API fetch
-const allPets = () =>{
+const allPets = () => {
     fetch('https://openapi.programming-hero.com/api/peddy/pets')
-    .then(res => res.json())
-    .then( data => displayAllPets(data.pets))
+        .then(res => res.json())
+        .then(data => displayAllPets(data.pets))
 }
 
 // For display the categories in button------------------>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -45,7 +45,7 @@ const displayCategories = (categories) => {
 };
 
 //for display all pets from API call
-const displayAllPets = (pets) =>{
+const displayAllPets = (pets) => {
     const petContainer = document.getElementById('all-pets-container');
     pets.forEach(pet => {
         const petCard = document.createElement('div');
@@ -53,10 +53,10 @@ const displayAllPets = (pets) =>{
         petCard.innerHTML = `
             <img class="w-full max-h-[130px] rounded-xl" src="${pet.image}"/>
             <h1 class="text-xl font-bold mt-4">${pet.pet_name}</h1>
-            <p>Breed: ${getValidatedValue(pet,"breed")}</p>
+            <p>Breed: ${getValidatedValue(pet, "breed")}</p>
             <p>Birth: ${getyearFromFullDate(pet.date_of_birth)}</p>
             <p>Gender: ${getValidatedValue(pet, "gender")}</p>
-            <p>Price: ${validateprice(pet, 'price')}</p>
+            <p>Price: ${validatePrice(pet, 'price')}</p>
         `;
         petContainer.append(petCard);
     });
