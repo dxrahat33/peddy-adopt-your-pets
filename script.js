@@ -52,11 +52,13 @@ const displayAllPets = (pets) => {
         petCard.classList = ('p-5 border rounded-xl')
         petCard.innerHTML = `
             <img class="w-full max-h-[130px] rounded-xl" src="${pet.image}"/>
-            <h1 class="text-xl font-bold mt-4">${pet.pet_name}</h1>
-            <p>Breed: ${getValidatedValue(pet, "breed")}</p>
-            <p>Birth: ${getyearFromFullDate(pet.date_of_birth)}</p>
-            <p>Gender: ${getValidatedValue(pet, "gender")}</p>
-            <p>Price: ${validatePrice(pet, 'price')}</p>
+            <h1 class="text-xl font-bold my-4">${pet.pet_name}</h1>
+            <div class="flex flex-col gap-2 justify-center">
+                <p class="flex gap-2"><img class="w-[25px] h-[25px] justify-center" src="https://img.icons8.com/?size=48&id=zukFPciIOcaq&format=png"/>Breed: ${getValidatedValue(pet, "breed")}</p>
+                <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=60611&format=png"/>Birth: ${getyearFromFullDate(pet.date_of_birth)}</p>
+                <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=1665&format=png"/>Gender: ${getValidatedValue(pet, "gender")}</p>
+                <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=2971&format=png"/>Price: ${validatePrice(pet, 'price')}</p>
+            </div>
         `;
         petContainer.append(petCard);
     });
