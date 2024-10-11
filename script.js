@@ -59,6 +59,11 @@ const displayAllPets = (pets) => {
                 <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=1665&format=png"/>Gender: ${getValidatedValue(pet, "gender")}</p>
                 <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=2971&format=png"/>Price: ${validatePrice(pet, 'price')}</p>
             </div>
+            <div class="flex justify justify-between py-3 mt-4">
+                <button class="btn"><i class="fa-regular fa-heart"></i><button/>
+                <button class="btn p-1">Adopt<button/>
+                <button class="btn p-1">Details<button/>
+            <div/>
         `;
         petContainer.append(petCard);
     });
