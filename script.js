@@ -21,6 +21,26 @@ const loadCategories = () => {
         .then(data => displayCategories(data.categories))
 };
 
+//sort button functionalities
+document.getElementById('sort-btn').addEventListener('click', function () {
+    const petsContainer = document.getElementById('all-pets-container');
+    const petsData = Array.from(petsContainer.children);
+
+    petsData.sort((a, b) => {
+        const priceA = parseFloat(a.querySelector('.price').innerText.replace("$", "")) || 0;
+        const priceB = parseFloat(b.querySelector('.price').innerText.replace("$", "")) || 0;
+        return (priceB - priceA);
+    });
+
+    //remove existing data
+    petsContainer.innerHTML = "";
+    petsData.forEach(pet => {
+        petsContainer.appendChild(pet);
+    });
+});
+
+//common functions end
+
 // call all pets by API fetch
 const allPets = () => {
     fetch('https://openapi.programming-hero.com/api/peddy/pets')
@@ -58,7 +78,7 @@ const displayAllPets = (pets) => {
                 <p class="flex gap-2 whitespace-nowrap"><img class="w-[25px] h-[25px] justify-center" src="https://img.icons8.com/?size=48&id=zukFPciIOcaq&format=png"/>Breed: ${getValidatedValue(pet, "breed")}</p>
                 <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=60611&format=png"/>Birth: ${getyearFromFullDate(pet.date_of_birth)}</p>
                 <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=1665&format=png"/>Gender: ${getValidatedValue(pet, "gender")}</p>
-                <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=2971&format=png"/>Price: ${validatePrice(pet, 'price')}</p>
+                <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=2971&format=png"/>Price: <span class="price">${validatePrice(pet, 'price')}</span></p>
             </div>
             <div class="flex py-3 mt-3 items-center justify-evenly">
                 <button class="btn btn-accent px-6 py-2 md:px-2"><i class="fa-regular fa-heart"></i><button/>
