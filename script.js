@@ -39,6 +39,16 @@ document.getElementById('sort-btn').addEventListener('click', function () {
     });
 });
 
+// category button functions
+const loadCategoryPets = (id) => {
+    fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            const activeBtn = document.getElementById(`btn-${id}`);
+            displayAllPets(data.data);
+        });
+}
+
 //common functions end
 
 // call all pets by API fetch
@@ -56,7 +66,7 @@ const displayCategories = (categories) => {
         const btnDiv = document.createElement('div')
         btnDiv.classList = ('flex items-center justify-center')
         btnDiv.innerHTML = `
-            <button class="flex items-center gap-4 w-[180px] py-2 justify-center border rounded-xl border-[rgba(14, 122, 129, 0.15)] cat-hover">
+            <button id="btn-${item.category}" onclick="loadCategoryPets('${item.category}')" class="flex items-center gap-4 w-[180px] py-2 justify-center border rounded-xl border-[rgba(14, 122, 129, 0.15)] cat-hover">
                 <img src="${item.category_icon}"/>
                 <p class="text-2xl font-semibold">${item.category}</p>
             </button>
