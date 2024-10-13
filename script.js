@@ -7,7 +7,7 @@ const getValidatedValue = (obj, key) =>
 
 // convert date of birth to only year function
 const getyearFromFullDate = (obj) =>
-    obj ? new Date(obj).getFullYear() : 'Not Availble';
+    obj ? new Date(obj).getFullYear() : 'Not Available';
 
 // price validate function
 const validatePrice = (obj, key) =>
@@ -44,10 +44,20 @@ const loadCategoryPets = (id) => {
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
         .then(res => res.json())
         .then(data => {
+            removeActiveClass();
             const activeBtn = document.getElementById(`btn-${id}`);
+            activeBtn.classList.add('active');
             displayAllPets(data.data);
         });
-}
+};
+
+//remove active class from category button---------------------->>>>>>>>
+const removeActiveClass = () => {
+    const buttons = document.getElementsByClassName("category-btn");
+    for (let btn of buttons) {
+        btn.classList.remove('active')
+    };
+};
 
 //common functions end
 
@@ -61,12 +71,12 @@ const allPets = () => {
 // For display the categories in button------------------>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 const displayCategories = (categories) => {
 
-    const categoriesContainer = document.getElementById('categories-container')
+    const categoriesContainer = document.getElementById('categories-container');
     categories.forEach(item => {
         const btnDiv = document.createElement('div')
         btnDiv.classList = ('flex items-center justify-center')
         btnDiv.innerHTML = `
-            <button id="btn-${item.category}" onclick="loadCategoryPets('${item.category}')" class="flex items-center gap-4 w-[180px] py-2 justify-center border rounded-xl border-[rgba(14, 122, 129, 0.15)] cat-hover">
+            <button id="btn-${item.category}" onclick="loadCategoryPets('${item.category}')" class="flex items-center gap-4 w-[180px] py-2 justify-center border rounded-xl border-[rgba(14, 122, 129, 0.15)] cat-hover active category-btn">
                 <img src="${item.category_icon}"/>
                 <p class="text-2xl font-semibold">${item.category}</p>
             </button>
@@ -78,6 +88,24 @@ const displayCategories = (categories) => {
 //for display all pets from API call
 const displayAllPets = (pets) => {
     const petContainer = document.getElementById('all-pets-container');
+    petContainer.innerHTML = "";
+
+    if (pets.length == 0) {
+        petContainer.classList.remove('grid');
+        petContainer.innerHTML = `
+            <div class="flex flex-col items-center justify-center gap-5 w-full">
+                <img src="images/error.webp"/>
+                <h1 class="font-bold text-3xl">No Information Available</h1>
+                <p>There are no pets in this category right now !</p>
+            </div>
+        `;
+        return;
+    } else {
+        petContainer.classList.add('grid')
+    };
+
+
+
     pets.forEach(pet => {
         const petCard = document.createElement('div');
         petCard.classList = ('p-5 border rounded-xl')
