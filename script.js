@@ -76,7 +76,7 @@ const displayCategories = (categories) => {
         const btnDiv = document.createElement('div')
         btnDiv.classList = ('flex items-center justify-center')
         btnDiv.innerHTML = `
-            <button id="btn-${item.category}" onclick="loadCategoryPets('${item.category}')" class="flex items-center gap-4 w-[180px] py-2 justify-center border rounded-xl border-[rgba(14, 122, 129, 0.15)] cat-hover active category-btn">
+            <button id="btn-${item.category}" onclick="loadCategoryPets('${item.category}')" class="flex items-center gap-4 w-[180px] py-2 justify-center border rounded-xl border-[rgba(14, 122, 129, 0.15)] cat-hover category-btn">
                 <img src="${item.category_icon}"/>
                 <p class="text-2xl font-semibold">${item.category}</p>
             </button>
@@ -120,13 +120,46 @@ const displayAllPets = (pets) => {
             </div>
             <div class="flex py-3 mt-3 items-center justify-evenly">
                 <button class="btn btn-accent px-6 py-2 md:px-2"><i class="fa-regular fa-heart"></i><button/>
-                <button class="btn btn-accent px-6 py-2 md:px-2">Adopt<button/>
+                <button class="adopt-btn btn btn-accent px-6 py-2 md:px-2">Adopt<button/>
                 <button class="btn btn-accent px-5 py-2 md:px-2 ">Details<button/>
             <div/>
         `;
         petContainer.append(petCard);
+
+        // adopt section ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    const adoptButton = petCard.querySelector('.adopt-btn').addEventListener('click', function(){
+        this.disabled = true;
+        this.innerText = 'Processing';
+
+        //show modal
+        const adoptModal = document.getElementById('adopt-modal');
+        adoptModal.classList.remove('hidden');
+        adoptModal.classList.add('flex');
+
+        //timer
+        let countdown = 3;
+        const countdownElement = document.getElementById('countdown');
+        countdownElement.innerText = countdown;
+
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            countdownElement.innerText = countdown;
+
+            if(countdown===0){
+                clearInterval(countdownInterval);
+                adoptModal.classList.add('hidden');
+
+                this.innerText = "Adopted";
+
+                this.classList.add("bg-red-500")
+                this.classList.add("text-white")
+            }
+        }, 1000);
+        });
     });
 }
+
+
 
 
 

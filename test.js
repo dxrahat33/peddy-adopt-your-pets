@@ -230,10 +230,6 @@ const showSpinner = () => {
         rightSideCardDiv.appendChild(petCard);
       });
   
-      //test
-      
-      //test
-  
       //adopt button ------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>
       const adoptButton = card
         .querySelector(".adopt-btn")
