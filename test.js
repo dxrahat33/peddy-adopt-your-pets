@@ -70,7 +70,7 @@ const showSpinner = () => {
       pet.vaccinated_status || "Not Available"
     }`;
     document.getElementById("modal-information").innerText = `${
-      pet.pet_details || "Not Availble"
+      pet.pet_details || "Not Available"
     }`;
   };
   

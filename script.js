@@ -3,11 +3,11 @@
 
 // all pets value validates
 const getValidatedValue = (obj, key) =>
-    obj[key] ? obj[key] : "Not Available";
+    obj[key] ? obj[key] : 'Not Available'
 
 // convert date of birth to only year function
-const getyearFromFullDate = (obj) =>
-    obj ? new Date(obj).getFullYear() : 'Not Available';
+const getYearFromFullDate = (obj) =>
+    obj ? new Date(obj).getFullYear() : 'Not Available'
 
 // price validate function
 const validatePrice = (obj, key) =>
@@ -59,6 +59,31 @@ const removeActiveClass = () => {
     };
 };
 
+
+//modal functionalities
+const showModal = (pet) => {
+    const detailsModal = document.getElementById('details-modal');
+    detailsModal.classList.remove('hidden');
+    detailsModal.classList.add('flex');
+
+    //set content
+    document.getElementById('modal-image').src = pet.image;
+    document.getElementById('modal-title').innerText = pet.pet_name;
+    document.getElementById('modal-breed').innerText = `Breed: ${pet.breed || 'Not Available'}`;
+    document.getElementById('modal-birth').innerText = `Birth Year: ${new Date(pet.date_of_birth).getFullYear() || 'Not Available'}`;
+    document.getElementById('modal-gender').innerText = pet.gender;
+    document.getElementById('modal-price').innerText = pet.price;
+    document.getElementById('modal-status').innerText = pet.vaccinated_status;
+    document.getElementById('modal-information').innerText = pet.pet_details;
+};
+//hide modal
+const hideModal = () => {
+    const detailsModal = document.getElementById('details-modal');
+    detailsModal.classList.add('hidden');
+    detailsModal.classList.remove('flex');
+};
+
+
 //common functions end
 
 // call all pets by API fetch
@@ -109,55 +134,62 @@ const displayAllPets = (pets) => {
     pets.forEach(pet => {
         const petCard = document.createElement('div');
         petCard.classList = ('p-5 border rounded-xl')
+
         petCard.innerHTML = `
             <img class="w-full md:max-h-[135px] lg:max-h-[130px] rounded-xl" src="${pet.image}"/>
             <h1 class="text-xl font-bold my-4">${pet.pet_name}</h1>
             <div class="flex flex-col gap-2 justify-center border-b pb-2">
                 <p class="flex gap-2 whitespace-nowrap"><img class="w-[25px] h-[25px] justify-center" src="https://img.icons8.com/?size=48&id=zukFPciIOcaq&format=png"/>Breed: ${getValidatedValue(pet, "breed")}</p>
-                <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=60611&format=png"/>Birth: ${getyearFromFullDate(pet.date_of_birth)}</p>
+                <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=60611&format=png"/>Birth: ${getYearFromFullDate(getValidatedValue(pet, "date_of_birth"))}</p>
                 <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=1665&format=png"/>Gender: ${getValidatedValue(pet, "gender")}</p>
                 <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=2971&format=png"/>Price: <span class="price">${validatePrice(pet, 'price')}</span></p>
             </div>
             <div class="flex py-3 mt-3 items-center justify-evenly">
                 <button class="btn btn-accent px-6 py-2 md:px-2"><i class="fa-regular fa-heart"></i><button/>
                 <button class="adopt-btn btn btn-accent px-6 py-2 md:px-2">Adopt<button/>
-                <button class="btn btn-accent px-5 py-2 md:px-2 ">Details<button/>
+                <button class="btn btn-accent px-5 py-2 md:px-2 details-btn">Details<button/>
             <div/>
         `;
         petContainer.append(petCard);
 
         // adopt section ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    const adoptButton = petCard.querySelector('.adopt-btn').addEventListener('click', function(){
-        this.disabled = true;
-        this.innerText = 'Processing';
+        const adoptButton = petCard.querySelector('.adopt-btn').addEventListener('click', function () {
+            this.disabled = true;
+            this.innerText = 'Processing';
 
-        //show modal
-        const adoptModal = document.getElementById('adopt-modal');
-        adoptModal.classList.remove('hidden');
-        adoptModal.classList.add('flex');
+            //show modal
+            const adoptModal = document.getElementById('adopt-modal');
+            adoptModal.classList.remove('hidden');
+            adoptModal.classList.add('flex');
 
-        //timer
-        let countdown = 3;
-        const countdownElement = document.getElementById('countdown');
-        countdownElement.innerText = countdown;
-
-        const countdownInterval = setInterval(() => {
-            countdown--;
+            //timer
+            let countdown = 3;
+            const countdownElement = document.getElementById('countdown');
             countdownElement.innerText = countdown;
 
-            if(countdown===0){
-                clearInterval(countdownInterval);
-                adoptModal.classList.add('hidden');
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.innerText = countdown;
 
-                this.innerText = "Adopted";
+                if (countdown === 0) {
+                    clearInterval(countdownInterval);
+                    adoptModal.classList.add('hidden');
 
-                this.classList.add("bg-red-500")
-                this.classList.add("text-white")
-            }
-        }, 1000);
+                    this.innerText = "Adopted";
+
+                    this.classList.add("bg-red-500")
+                    this.classList.add("text-white")
+                }
+            }, 1000);
         });
+
+        //details button show modal function call
+        const detailsButton = petCard.querySelector('.details-btn');
+        detailsButton.addEventListener('click', function () {
+            showModal(pet);
+        })
     });
-}
+};
 
 
 

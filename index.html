@@ -145,36 +145,82 @@
       </section>
 
       <!-- sorting -->
-      <section class="max-w-5xl mx-4 md:mx-auto items-center my-12 flex justify-between ">
+      <section
+        class="max-w-5xl mx-4 md:mx-auto items-center my-12 flex justify-between"
+      >
         <h1 class="text-3xl font-semibold">Best deals for you</h1>
-        <button id="sort-btn" class="btn btn-accent md:text-xl px-5">Sort</button>
+        <button id="sort-btn" class="btn btn-accent md:text-xl px-5">
+          Sort
+        </button>
       </section>
-
 
       <!-- main pets card -->
       <section class="max-w-5xl lg:mx-auto py-10 mx-4 md:mx-1">
-        <div id="all-pets-container" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        <div
+          id="all-pets-container"
+          class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4"
+        ></div>
       </section>
     </main>
 
-
-
     <!-- START adopt modal -->
-     <div id="adopt-modal" class="hidden inset-0 fixed bg-gray-500 bg-opacity-50 items-center justify-center">
-      <div class="bg-white p-6 rounded-lg text-center flex flex-col items-center gap-5">
+    <div
+      id="adopt-modal"
+      class="hidden inset-0 fixed bg-gray-500 bg-opacity-50 items-center justify-center"
+    >
+      <div
+        class="bg-white p-6 rounded-lg text-center flex flex-col items-center gap-5"
+      >
         <h2>Congrats !</h2>
-        <img src="https://img.icons8.com/?size=80&id=WesMBYvcOgBp&format=png" alt="congrate">
+        <img
+          src="https://img.icons8.com/?size=80&id=WesMBYvcOgBp&format=png"
+          alt="congrate"
+        />
         <p>Pet Adopting in <span id="countdown">3</span></p>
       </div>
-     </div>
+    </div>
     <!-- END adopt modal -->
 
     <!-- START details modal -->
      
+    <!-- details modal -->
+    <div
+      id="details-modal"
+      class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 items-center justify-center"
+    >
+      <div
+        class="bg-white rounded-lg p-6 max-w-[700px] max-h-[750px] mx-auto overflow-auto"
+      >
+        <img
+          id="modal-image"
+          class="rounded-lg max-w-11/12 h-[220px] mx-auto mb-4"
+          alt="Pet Image"
+        />
+        <h2 class="text-xl font-bold mb-4" id="modal-title">Pet Details</h2>
+        <div class="grid grid-cols-3 gap-5">
+          <div>
+            <p id="modal-breed">Breed:</p>
+            <p id="modal-gender">Gender:</p>
+            <p id="modal-status">Vaccinated Status:</p>
+          </div>
+          <div>
+            <p id="modal-birth">Birth Year:</p>
+            <p id="modal-price">Price:</p>
+          </div>
+          <div></div>
+        </div>
+        <h2 class="text-xl font-bold my-4">Details Information</h2>
+        <p id="modal-information"></p>
+
+        <button
+          class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg"
+          onclick="hideModal()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
     <!-- END details modal -->
-
-
-
 
     <script src="script.js"></script>
   </body>
