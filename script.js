@@ -7,7 +7,7 @@ const getValidatedValue = (obj, key) =>
 
 // convert date of birth to only year function
 const getYearFromFullDate = (obj) =>
-    obj ? new Date(obj).getFullYear() : 'Not Available'
+    obj ? (!isNaN(new Date(obj)) ? new Date(obj).getFullYear() : 'Not Available') : 'Not Available';
 
 // price validate function
 const validatePrice = (obj, key) =>
@@ -70,7 +70,7 @@ const showModal = (pet) => {
     document.getElementById('modal-image').src = pet.image;
     document.getElementById('modal-title').innerText = pet.pet_name;
     document.getElementById('modal-breed').innerText = `Breed: ${pet.breed || 'Not Available'}`;
-    document.getElementById('modal-birth').innerText = `Birth Year: ${new Date(pet.date_of_birth).getFullYear() || 'Not Available'}`;
+    document.getElementById('modal-birth').innerText = `Birth Year: ${pet.date_of_birth ? new Date(pet.date_of_birth).getFullYear() : 'Not Available'}`;
     document.getElementById('modal-gender').innerText = pet.gender;
     document.getElementById('modal-price').innerText = pet.price;
     document.getElementById('modal-status').innerText = pet.vaccinated_status;
@@ -140,7 +140,7 @@ const displayAllPets = (pets) => {
             <h1 class="text-xl font-bold my-4">${pet.pet_name}</h1>
             <div class="flex flex-col gap-2 justify-center border-b pb-2">
                 <p class="flex gap-2 whitespace-nowrap"><img class="w-[25px] h-[25px] justify-center" src="https://img.icons8.com/?size=48&id=zukFPciIOcaq&format=png"/>Breed: ${getValidatedValue(pet, "breed")}</p>
-                <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=60611&format=png"/>Birth: ${getYearFromFullDate(getValidatedValue(pet, "date_of_birth"))}</p>
+                <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=60611&format=png"/>Birth: ${getYearFromFullDate(pet.date_of_birth)}</p>
                 <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=1665&format=png"/>Gender: ${getValidatedValue(pet, "gender")}</p>
                 <p class="flex gap-2"><img class="w-[25px]" src="https://img.icons8.com/?size=50&id=2971&format=png"/>Price: <span class="price">${validatePrice(pet, 'price')}</span></p>
             </div>
