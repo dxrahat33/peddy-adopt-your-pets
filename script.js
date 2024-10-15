@@ -71,9 +71,9 @@ const showModal = (pet) => {
     document.getElementById('modal-title').innerText = pet.pet_name;
     document.getElementById('modal-breed').innerText = `Breed: ${pet.breed || 'Not Available'}`;
     document.getElementById('modal-birth').innerText = `Birth Year: ${pet.date_of_birth ? new Date(pet.date_of_birth).getFullYear() : 'Not Available'}`;
-    document.getElementById('modal-gender').innerText = pet.gender;
-    document.getElementById('modal-price').innerText = pet.price;
-    document.getElementById('modal-status').innerText = pet.vaccinated_status;
+    document.getElementById('modal-gender').innerText = `Gender: ${pet.gender || 'Not Available '}`;
+    document.getElementById('modal-price').innerText = `Price: ${pet.price || 'Not Available'}`;
+    document.getElementById('modal-status').innerText = `Vaccinated: ${pet.vaccinated_status || 'No'}`;
     document.getElementById('modal-information').innerText = pet.pet_details;
 };
 //hide modal
